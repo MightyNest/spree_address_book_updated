@@ -1,0 +1,33 @@
+<div class="select_address">
+  <h4>Select a new address or existing:</h4>
+  <div class='row'>
+    <div class='col-md-6'>
+      <div class="form-group">
+        <label><%= Spree.t(:billing_address) %></label>
+        <select id='order_bill_address_id' name="order[bill_address_id]" class='select2'>
+          <option value=''>Add a New Address</option>
+          <% if @addresses %>
+            <% @addresses.each do |a| %>
+            <option value='<%= a.id %>' <%= 'selected' if @order.bill_address_id == a.id %>><%= a.address1 %> <%= a.zipcode %>
+            </option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+    <div class='col-md-6'>
+      <div class="form-group">
+        <label><%= Spree.t(:shipping_address) %></label>
+        <select id='order_ship_address_id' name="order[ship_address_id]" class='select2'>
+          <option value=''>Add a New Address</option>
+          <% if @addresses %>
+            <% @addresses.each do |a| %>
+            <option value='<%= a.id %>' <%= 'selected' if @order.ship_address_id == a.id %>><%= a.address1 %> <%= a.zipcode %>
+            </option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
