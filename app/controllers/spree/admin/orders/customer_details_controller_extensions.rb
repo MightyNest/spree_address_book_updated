@@ -12,7 +12,7 @@ module Spree
           prepare_params
           load_addresses
 
-          if result = @order.update_attributes(email: @params[:email])
+          if @order.update_attributes(email: @params[:email])
             @order.associate_user!(@user, @order.email.blank?) unless guest_checkout?
 
             set_addresses_by_ids
@@ -76,10 +76,6 @@ module Spree
               ship_address_attributes: permitted_address_attributes,
             )[:ship_address_attributes]
           end
-        end
-
-        def order_params
-          @params.permit(:email, :ship_address_id, :bill_address_id)
         end
 
         def prepare_params
