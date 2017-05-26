@@ -15,11 +15,14 @@ module Spree
           if @order.update_attributes(email: @params[:email])
             @order.associate_user!(@user, @order.email.blank?) unless guest_checkout?
 
+            # Use Spree Address Book setters instead of direct update_attributes to prevent
+            # overwriting of any stored addresses
             set_addresses_by_ids
-
-            # OVERRIDE to use Spree Address Book settings to prevent overwriting of
-            # any stored addresses since update attributes
             set_addresses_by_attributes
+
+            # required when returning for a completed order that needs an address update
+            # to ensure shipment has correct shipping address on unshipped orders
+            update_unshipped_shipments
 
             @order.next unless @order.complete?
 
@@ -37,6 +40,13 @@ module Spree
         end
 
         private
+
+        def update_unshipped_shipments
+          @order.shipments.with_state([:ready, :pending]).each do |s|
+            s.address = @order.ship_address
+            s.save
+          end
+        end
 
         def load_addresses
           @addresses = @order.user.nil? ? [] : @order.user.addresses
