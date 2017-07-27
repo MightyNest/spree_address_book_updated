@@ -64,12 +64,13 @@ module Spree
             if @params[:ship_address_id].blank?
               @order.use_billing = @params[:use_billing]
             end
-            @order.bill_address_attributes = bill_address_params
+            @order.bill_address_attributes = bill_address_params.merge(user_id: @order.user_id)
           end
 
           if @params[:ship_address_id].blank?
-            @order.ship_address_attributes = ship_address_params
+            @order.ship_address_attributes = ship_address_params.merge(user_id: @order.user_id)
           end
+          @order.save
         end
 
         def bill_address_params
