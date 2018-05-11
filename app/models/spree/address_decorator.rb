@@ -28,6 +28,8 @@ Spree::Address.class_eval do
   end
 
   def to_s
+    # use html safe buffer to ensure elements are escaped properly
+    safe_buffer = ''.html_safe
     [
       full_name,
       company,
