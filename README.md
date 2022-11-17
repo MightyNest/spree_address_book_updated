@@ -1,3 +1,6 @@
+This repo is a merge of MightyNest's forked version of spree_address_book + pulling in all changes from Spree's original master version + added one of the Spree PR's that was not merged which should get this working in 3.7.    
+
+
 ## ⚠️ Deprecation notice ⚠️
 
 Since Spree 4.0 this extension is deprecated and not needed. Address Book was [merged into Spree core in Spree 4.0](https://guides.spreecommerce.org/release_notes/4_0_0.html#address-book-support). 
@@ -41,13 +44,3 @@ This extension allows registered users to have multiple shipping & billing addre
 
   If your server was running, restart it so that it can find the assets properly.
 
-
-## Contributing
-
-If you'd like to contribute, please take a look at the
-[instructions](CONTRIBUTING.md) for installing dependencies and crafting a good
-pull request.
-
-## License
-
-Copyright (c) 2011-2016 Roman Smirnov & [contributors](https://github.com/spree-contrib/spree_address_book/graphs/contributors), released under the New BSD License
