@@ -26,7 +26,7 @@ module Spree
 
             @order.next unless @order.complete?
 
-            @order.refresh_shipment_rates(Spree::ShippingMethod::DISPLAY_ON_FRONT_AND_BACK_END)
+            @order.refresh_shipment_rates(0)
 
             if @order.errors.empty?
               flash[:success] = Spree.t('customer_details_updated')
